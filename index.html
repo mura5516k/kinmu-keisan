@@ -1,0 +1,85 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>勤務収入トラッカー | 入力</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>勤務収入トラッカー</h1>
+      <p>スマホで毎日の勤務をすばやく入力</p>
+    </header>
+
+    <section class="card auth-card">
+      <div id="authState" class="auth-state">ログインしていません</div>
+      <div class="auth-actions">
+        <button id="googleLoginBtn" class="btn">Googleログイン</button>
+        <button id="logoutBtn" class="btn btn-secondary" disabled>ログアウト</button>
+      </div>
+    </section>
+
+    <section class="card pc-only" id="desktopQrSection">
+      <h2>スマホログイン用QR</h2>
+      <p class="qr-note">スマホで読み取って同じページを開いてください。</p>
+      <div class="qr-wrap">
+        <canvas id="desktopQrCanvas" width="180" height="180"></canvas>
+      </div>
+      <p class="qr-url" id="desktopQrUrl"></p>
+    </section>
+
+    <section class="card nav-card" id="navCard" hidden>
+      <a class="btn btn-link" href="monthly.html">月の一覧を表示</a>
+    </section>
+
+    <section class="card" id="entrySection" hidden>
+      <h2>今日の勤務入力</h2>
+      <form id="entryForm" class="stack-form">
+        <label>
+          日付
+          <input type="date" id="workDate" required />
+        </label>
+        <div class="two-col">
+          <label>
+            開始 (hh:mm)
+            <input type="time" id="startTime" step="60" required />
+          </label>
+          <label>
+            終了 (hh:mm)
+            <input type="time" id="endTime" step="60" required />
+          </label>
+        </div>
+        <div class="two-col">
+          <label>
+            休憩(分)
+            <input type="number" id="breakMinutes" min="0" step="1" value="0" required />
+          </label>
+          <label>
+            時給(円)
+            <input type="number" id="hourlyWage" min="0" step="1" required />
+          </label>
+        </div>
+
+        <div class="calc-box" id="dailyPreview">
+          <div>
+            <span>実働時間</span>
+            <strong id="previewHours">0.00h</strong>
+          </div>
+          <div>
+            <span>日収見込み</span>
+            <strong id="previewIncome">0円</strong>
+          </div>
+        </div>
+
+        <button type="submit" class="btn">保存する</button>
+      </form>
+    </section>
+
+    <p class="note">初回は <code>firebase-config.js</code> の設定が必要です。</p>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

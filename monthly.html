@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>勤務収入トラッカー | 月一覧</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>月の一覧</h1>
+      <p>勤務記録と月収を確認</p>
+    </header>
+
+    <section class="card auth-card">
+      <div id="authState" class="auth-state">ログインしていません</div>
+      <div class="auth-actions">
+        <button id="googleLoginBtn" class="btn">Googleログイン</button>
+        <button id="logoutBtn" class="btn btn-secondary" disabled>ログアウト</button>
+      </div>
+    </section>
+
+    <section class="card nav-card" id="navCard" hidden>
+      <a class="btn btn-link" href="index.html">入力画面へ戻る</a>
+    </section>
+
+    <section class="card" id="monthlySection" hidden>
+      <label>
+        対象月
+        <input type="month" id="targetMonth" />
+      </label>
+
+      <div class="calc-box month-summary">
+        <div>
+          <span>勤務日数</span>
+          <strong id="sumDays">0日</strong>
+        </div>
+        <div>
+          <span>労働時間</span>
+          <strong id="sumHours">0.00h</strong>
+        </div>
+        <div>
+          <span>月収</span>
+          <strong id="sumIncome">0円</strong>
+        </div>
+      </div>
+
+      <div id="entryList" class="entry-list"></div>
+    </section>
+  </main>
+
+  <script type="module" src="monthly.js"></script>
+</body>
+</html>
