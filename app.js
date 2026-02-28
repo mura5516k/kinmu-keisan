@@ -30,15 +30,12 @@ const hourlyWage = document.getElementById("hourlyWage");
 
 const previewHours = document.getElementById("previewHours");
 const previewIncome = document.getElementById("previewIncome");
-const desktopQrImage = document.getElementById("desktopQrImage");
-const desktopQrUrl = document.getElementById("desktopQrUrl");
 
 let currentUser = null;
 
 const now = new Date();
 const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
 workDate.value = `${currentMonth}-${String(now.getDate()).padStart(2, "0")}`;
-setupDesktopQr();
 
 googleLoginBtn.addEventListener("click", async () => {
   try {
@@ -162,19 +159,4 @@ function updatePreview() {
 
   previewHours.textContent = `${workedHours.toFixed(2)}h`;
   previewIncome.textContent = `${formatYen(income)}円`;
-}
-
-function setupDesktopQr() {
-  if (!desktopQrImage || !desktopQrUrl) {
-    return;
-  }
-
-  const targetUrl = new URL(window.location.href);
-  targetUrl.hash = "";
-  const urlText = targetUrl.toString();
-
-  desktopQrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(urlText)}`;
-  desktopQrImage.width = 180;
-  desktopQrImage.height = 180;
-  desktopQrUrl.textContent = urlText;
 }
