@@ -25,7 +25,7 @@
       <h2>スマホログイン用QR</h2>
       <p class="qr-note">スマホで読み取って同じページを開いてください。</p>
       <div class="qr-wrap">
-        <canvas id="desktopQrCanvas" width="180" height="180"></canvas>
+        <img id="desktopQrImage" class="qr-image" alt="スマホログイン用QRコード" />
       </div>
       <p class="qr-url" id="desktopQrUrl"></p>
     </section>
@@ -77,7 +77,6 @@
       </form>
     </section>
 
-    <p class="note">初回は <code>firebase-config.js</code> の設定が必要です。</p>
   </main>
 
   <script type="module" src="app.js"></script>

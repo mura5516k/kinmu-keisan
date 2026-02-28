@@ -246,6 +246,12 @@ input {
   background: #fafdfc;
 }
 
+.qr-image {
+  width: 180px;
+  height: 180px;
+  display: block;
+}
+
 .qr-url {
   margin: 8px 0 0;
   color: var(--muted);

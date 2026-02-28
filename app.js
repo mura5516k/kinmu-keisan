@@ -14,7 +14,6 @@
   calculateWorkedMinutes,
   formatYen
 } from "./firebase-client.js";
-import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.4/+esm";
 
 const authState = document.getElementById("authState");
 const googleLoginBtn = document.getElementById("googleLoginBtn");
@@ -31,7 +30,7 @@ const hourlyWage = document.getElementById("hourlyWage");
 
 const previewHours = document.getElementById("previewHours");
 const previewIncome = document.getElementById("previewIncome");
-const desktopQrCanvas = document.getElementById("desktopQrCanvas");
+const desktopQrImage = document.getElementById("desktopQrImage");
 const desktopQrUrl = document.getElementById("desktopQrUrl");
 
 let currentUser = null;
@@ -165,26 +164,17 @@ function updatePreview() {
   previewIncome.textContent = `${formatYen(income)}円`;
 }
 
-async function setupDesktopQr() {
-  if (!desktopQrCanvas || !desktopQrUrl) {
+function setupDesktopQr() {
+  if (!desktopQrImage || !desktopQrUrl) {
     return;
   }
 
   const targetUrl = new URL(window.location.href);
   targetUrl.hash = "";
   const urlText = targetUrl.toString();
-  desktopQrUrl.textContent = urlText;
 
-  try {
-    await QRCode.toCanvas(desktopQrCanvas, urlText, {
-      width: 180,
-      margin: 1,
-      color: {
-        dark: "#1f2937",
-        light: "#ffffff"
-      }
-    });
-  } catch (error) {
-    desktopQrUrl.textContent = `QR生成失敗: ${error.message}`;
-  }
+  desktopQrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(urlText)}`;
+  desktopQrImage.width = 180;
+  desktopQrImage.height = 180;
+  desktopQrUrl.textContent = urlText;
 }
